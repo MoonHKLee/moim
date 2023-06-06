@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.data:spring-data-jpa'
+    implementation 'org.hibernate.orm:hibernate-core'
     implementation 'org.springframework:spring-webmvc'
     implementation 'org.springframework.session:spring-session-core'
     implementation 'org.springframework.security:spring-security-crypto'
