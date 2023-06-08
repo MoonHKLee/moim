@@ -7,4 +7,11 @@ import java.time.LocalDate;
 @Embeddable
 public class BirthDate {
     private LocalDate birthDate;
+
+    public BirthDate() {
+    }
+
+    public BirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
 }

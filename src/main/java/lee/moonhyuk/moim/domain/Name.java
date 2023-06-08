@@ -6,4 +6,10 @@ import jakarta.persistence.Embeddable;
 public class Name {
     private String name;
 
+    public Name() {
+    }
+
+    public Name(String name) {
+        this.name = name;
+    }
 }
