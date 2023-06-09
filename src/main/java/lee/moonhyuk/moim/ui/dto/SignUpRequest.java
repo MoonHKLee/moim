@@ -35,7 +35,7 @@ public class SignUpRequest {
         this.organization = organization;
     }
 
-    public static Participant of(SignUpRequest request) {
+    public static Participant ofParticipant(SignUpRequest request) {
         Participant participant = new Participant();
         participant.setName(new Name(request.getName()));
         participant.setBirthDate(new BirthDate(request.getBirthDate()));

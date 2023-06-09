@@ -17,4 +17,10 @@ public class MemberController {
         memberService.signUpParticipant(signUpRequest);
         return "success";
     }
+
+    @PostMapping("/member/sponsor")
+    public String updateMember(@RequestBody SignUpRequest signUpRequest) {
+        memberService.updateMember(signUpRequest);
+        return "success";
+    }
 }
