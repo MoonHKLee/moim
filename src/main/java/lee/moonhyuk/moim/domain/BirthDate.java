@@ -4,6 +4,7 @@ import jakarta.persistence.Embeddable;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 @Embeddable
 public class BirthDate {
@@ -13,9 +14,15 @@ public class BirthDate {
     }
 
     public BirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+        this.birthDate = Optional.ofNullable(birthDate)
+                .orElseThrow(() -> new IllegalArgumentException("birthDate must not be null or empty"));
     }
     public BirthDate(String birthDate) {
-        this.birthDate = LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String value = Optional.ofNullable(birthDate)
+                .orElseThrow(() -> new IllegalArgumentException("birthDate must not be null or empty"));
+        if (value.isEmpty()) {
+            throw new IllegalArgumentException("birthDate must not be null or empty");
+        }
+        this.birthDate = LocalDate.parse(value, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }
