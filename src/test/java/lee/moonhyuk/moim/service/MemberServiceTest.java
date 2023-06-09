@@ -17,17 +17,18 @@ public class MemberServiceTest {
     @Test
     void test() {
         //given
-        SignUpRequest signUpRequest = new SignUpRequest();
-        signUpRequest.setName("이문혁");
-        signUpRequest.setBirthDate("1994-09-25");
-        signUpRequest.setMemberId("moonhyuk.lee");
-        signUpRequest.setPassword("P@ssw0rd");
-        signUpRequest.setEmail("moonhyuk.lee@gmail.com");
-        signUpRequest.setOrganization("NEXTSTEP");
-        signUpRequest.setSex(Sex.MALE);
+        SignUpRequest input = SignUpRequest.sponsor()
+                .name("이문혁")
+                .birthDate("1994-09-25")
+                .memberId("moonhyuk.lee")
+                .password("P@ssw0rd")
+                .email("moonhyuk.lee@gmail.com")
+                .organization("NEXTSTEP")
+                .sex(Sex.MALE)
+                .build();
 
         //when
-        Member member = memberService.signUpParticipant(signUpRequest);
+        Member member = memberService.signUpParticipant(input);
 
         //then
         assertThat(member.getName().isSameName("이문혁")).isTrue();

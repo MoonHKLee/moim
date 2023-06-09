@@ -7,7 +7,6 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class SignUpRequest {
     private String name;
     private String birthDate;
@@ -18,6 +17,20 @@ public class SignUpRequest {
     private String organization;
     private List<String> allergenList;
     private String introduce;
+
+    private SignUpRequest() {
+    }
+
+    @Builder(builderMethodName = "sponsor")
+    public SignUpRequest(String name, String birthDate, Sex sex, String memberId, String password, String email, String organization) {
+        this.name = name;
+        this.birthDate = birthDate;
+        this.sex = sex;
+        this.memberId = memberId;
+        this.password = password;
+        this.email = email;
+        this.organization = organization;
+    }
 
     public static Participant of(SignUpRequest request) {
         Participant participant = new Participant();
