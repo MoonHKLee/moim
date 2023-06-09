@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -72,5 +74,14 @@ public class MemberService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
         sponsor.setOrganization(new Organization(signUpRequest.getOrganization()));
         return memberRepository.save(SignUpRequest.ofSponsor(signUpRequest));
+    }
+
+    public SignUpRequest.NoPasswordUserData getMe() {
+        String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
+        Participant participant = participantRepository.findParticipantByMemberId(memberId)
+                .orElseThrow(NoSuchElementException::new);
+        Sponsor sponsor = sponsorRepository.findSponsorByMemberId(memberId)
+                .orElseThrow(NoSuchElementException::new);
+        return SignUpRequest.of(participant, sponsor);
     }
 }

@@ -58,4 +58,38 @@ public class SignUpRequest {
         sponsor.setOrganization(new Organization(request.getOrganization()));
         return sponsor;
     }
+
+    public static NoPasswordUserData of(Participant participant, Sponsor sponsor) {
+        NoPasswordUserData request = new NoPasswordUserData();
+        if (participant != null) {
+            request.setName(participant.getName().getName());
+            request.setBirthDate(participant.getBirthDate().getBirthDate().toString());
+            request.setSex(participant.getSex());
+            request.setMemberId(participant.getMemberId());
+            request.setEmail(participant.getEmail().getEmail());
+            request.setIntroduce(participant.getIntroduce().getIntroduce());
+        }
+        if (sponsor != null) {
+            request.setName(sponsor.getName().getName());
+            request.setBirthDate(sponsor.getBirthDate().getBirthDate().toString());
+            request.setSex(sponsor.getSex());
+            request.setMemberId(sponsor.getMemberId());
+            request.setEmail(sponsor.getEmail().getEmail());
+            request.setOrganization(sponsor.getOrganization().getOrganization());
+        }
+        return request;
+    }
+
+    @Getter
+    @Setter
+    public static class NoPasswordUserData {
+        private String name;
+        private String birthDate;
+        private Sex sex;
+        private String memberId;
+        private String email;
+        private String organization;
+        private List<String> allergenList;
+        private String introduce;
+    }
 }

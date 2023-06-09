@@ -3,10 +3,8 @@ package lee.moonhyuk.moim.ui;
 import lee.moonhyuk.moim.service.MemberService;
 import lee.moonhyuk.moim.ui.dto.SignUpRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,6 +33,11 @@ public class MemberController {
     public String updateSponsor(@RequestBody SignUpRequest signUpRequest) {
         memberService.updateToSponsor(signUpRequest);
         return "success";
+    }
+
+    @GetMapping("/member/me")
+    public ResponseEntity<SignUpRequest.NoPasswordUserData> updateSponsor() {
+        return ResponseEntity.ok(memberService.getMe());
     }
 
 }
