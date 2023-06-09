@@ -3,6 +3,7 @@ package lee.moonhyuk.moim.domain;
 import jakarta.persistence.Embeddable;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Embeddable
 public class Name {
@@ -16,6 +17,11 @@ public class Name {
     }
 
     public Name(String name) {
-        this.name = name;
+        String value = Optional.ofNullable(name)
+                .orElseThrow(() -> new IllegalArgumentException("name must not be null or empty"));
+        if (value.isEmpty()) {
+            throw new IllegalArgumentException("name must not be null or empty");
+        }
+        this.name = value;
     }
 }
