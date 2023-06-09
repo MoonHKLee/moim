@@ -1,8 +1,10 @@
 package lee.moonhyuk.moim.domain;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.Embeddable;
+import lombok.Getter;
 
 @Embeddable
+@Getter
 public class Password {
     private String password;
 
@@ -12,4 +14,5 @@ public class Password {
     public Password(String password) {
         this.password = password;
     }
+
 }

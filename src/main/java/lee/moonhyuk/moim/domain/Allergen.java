@@ -1,8 +1,13 @@
 package lee.moonhyuk.moim.domain;
 
-import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 public class Allergen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

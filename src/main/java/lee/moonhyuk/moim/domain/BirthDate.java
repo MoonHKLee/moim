@@ -1,6 +1,6 @@
 package lee.moonhyuk.moim.domain;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.Embeddable;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

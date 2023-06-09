@@ -1,9 +1,8 @@
 package lee.moonhyuk.moim.domain;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.OneToMany;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +15,7 @@ import java.util.List;
 @Setter
 public class Participant extends Member {
     @OneToMany(mappedBy = "participant")
-    private List<Allergen> allergenList;
+    private List<Allergen> allergenList = new ArrayList<>();
     @Embedded
     private Introduce introduce;
 
@@ -42,6 +41,5 @@ public class Participant extends Member {
         }
         this.introduce = new Introduce(introduce);
     }
-
 
 }

@@ -1,8 +1,7 @@
 package lee.moonhyuk.moim.domain;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
 
 import java.time.LocalDate;
 

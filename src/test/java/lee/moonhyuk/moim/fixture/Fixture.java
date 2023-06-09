@@ -11,6 +11,13 @@ public enum Fixture {
               "email": "moonhyuk.lee@gmail.com",
               "organization": "youth-room"
             }
+            """),
+
+    LOG_IN("""
+            {
+              "memberId": "name",
+              "password": "P@ssword"
+            }
             """);
     String content;
 

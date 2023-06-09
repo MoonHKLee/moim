@@ -1,9 +1,9 @@
 package lee.moonhyuk.moim.domain;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -28,6 +28,10 @@ public class Member {
     private Email email;
 
     public Member() {}
+    public Member(String memberId, String password) {
+        this.memberId = new MemberId(memberId);
+        this.password = new Password(password);
+    }
     public Member(String name, LocalDate birthDate, Sex sex, String memberId, String password, String email) {
         this.name = new Name(name);
         this.birthDate = new BirthDate(birthDate);
@@ -48,5 +52,12 @@ public class Member {
 
     public Long getSeq() {
         return seq;
+    }
+
+    public String getMemberId() {
+        return memberId.getMemberId();
+    }
+    public String getPassword() {
+        return password.getPassword();
     }
 }

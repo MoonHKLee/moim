@@ -1,6 +1,6 @@
 package lee.moonhyuk.moim.domain;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.Embeddable;
 
 import java.util.Objects;
 import java.util.Optional;
