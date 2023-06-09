@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 @SpringBootTest
 public class MemberServiceTest {
@@ -15,7 +16,7 @@ public class MemberServiceTest {
     private MemberService memberService;
 
     @Test
-    void test() {
+    void test_signup() {
         //given
         SignUpRequest input = SignUpRequest.sponsor()
                 .name("이문혁")
@@ -32,5 +33,20 @@ public class MemberServiceTest {
 
         //then
         assertThat(member.getName().isSameName("이문혁")).isTrue();
+    }
+
+    @Test
+    void test_signup_sex_null() {
+        //given
+        assertThatCode(()->SignUpRequest.sponsor()
+                .name("이문혁")
+                .birthDate("1994-09-25")
+                .memberId("moonhyuk.lee")
+                .password("P@ssw0rd")
+                .email("moonhyuk.lee@gmail.com")
+                .organization("NEXTSTEP")
+                .build())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("sex must not be null");
     }
 }

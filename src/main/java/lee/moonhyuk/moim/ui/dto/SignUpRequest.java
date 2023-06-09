@@ -25,6 +25,9 @@ public class SignUpRequest {
     public SignUpRequest(String name, String birthDate, Sex sex, String memberId, String password, String email, String organization) {
         this.name = name;
         this.birthDate = birthDate;
+        if (sex==null) {
+            throw new IllegalArgumentException("sex must not be null");
+        }
         this.sex = sex;
         this.memberId = memberId;
         this.password = password;
