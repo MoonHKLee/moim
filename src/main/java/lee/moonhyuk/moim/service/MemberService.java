@@ -3,6 +3,7 @@ package lee.moonhyuk.moim.service;
 import lee.moonhyuk.moim.domain.*;
 import lee.moonhyuk.moim.ui.dto.SignUpRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final ParticipantRepository participantRepository;
+    private final SponsorRepository sponsorRepository;
     private final AllergenRepository allergenRepository;
     private final FoodRepository foodRepository;
     private final BCryptPasswordEncoder passwordEncoder;
@@ -48,5 +51,26 @@ public class MemberService {
         allergenRepository.deleteAllByParticipant(participant);
         foods.forEach(v->allergenRepository.save(new Allergen(participant,v)));
         return memberRepository.save(SignUpRequest.ofParticipant(signUpRequest));
+    }
+
+    public Participant updateToParticipant(SignUpRequest signUpRequest) {
+        String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
+        Participant participant = participantRepository.findParticipantByMemberId(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+        participant.setIntroduce(new Introduce(signUpRequest.getIntroduce()));
+        List<Food> foods = signUpRequest.getAllergenList()
+                .stream()
+                .map(foodRepository::findFoodByName)
+                .toList();
+        foods.forEach(v->allergenRepository.save(new Allergen(participant,v)));
+        return memberRepository.save(SignUpRequest.ofParticipant(signUpRequest));
+    }
+
+    public Sponsor updateToSponsor(SignUpRequest signUpRequest) {
+        String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
+        Sponsor sponsor = sponsorRepository.findSponsorByMemberId(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+        sponsor.setOrganization(new Organization(signUpRequest.getOrganization()));
+        return memberRepository.save(SignUpRequest.ofSponsor(signUpRequest));
     }
 }

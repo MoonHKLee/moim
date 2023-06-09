@@ -46,4 +46,16 @@ public class SignUpRequest {
         participant.setIntroduce(new Introduce(request.getIntroduce()));
         return participant;
     }
+
+    public static Sponsor ofSponsor(SignUpRequest request) {
+        Sponsor sponsor = new Sponsor();
+        sponsor.setName(new Name(request.getName()));
+        sponsor.setBirthDate(new BirthDate(request.getBirthDate()));
+        sponsor.setSex(request.getSex());
+        sponsor.setMemberId(new MemberId(request.getMemberId()));
+        sponsor.setPassword(new Password(request.getPassword()));
+        sponsor.setEmail(new Email(request.getEmail()));
+        sponsor.setOrganization(new Organization(request.getOrganization()));
+        return sponsor;
+    }
 }

@@ -1,11 +1,16 @@
 package lee.moonhyuk.moim.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
 import java.time.LocalDate;
 
 @Entity
+@Getter
+@Setter
 public class Sponsor extends Member {
     @Embedded
     private Organization organization;
